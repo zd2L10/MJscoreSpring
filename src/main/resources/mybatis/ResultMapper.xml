@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.app.mapper.ResultMapper">
+	
+	<select id="findNewerResults" resultMap="joinedResult">
+		SELECT * FROM result 
+		JOIN user 
+		ON result.user_id = user.id 
+		WHERE user_id = #{id}
+		ORDER BY time DESC
+	</select>
+	
+	<select id="findResult" parameterType="int" resultType="Result">
+		SELECT * FROM result 
+		WHERE ures_id = #{id} 
+		ORDER BY time DESC LIMIT 1
+	</select>
+	
+	<insert id="insert" parameterType="Result">
+		INSERT INTO result 
+		(user_id, derection, `rank`, time, 
+		east_score, south_score, 
+		west_score, north_score, 
+		east_player, south_player, 
+		west_player, north_player)
+		VALUES 
+		(#{user_id}, #{derection}, #{rank}, NOW(), 
+		#{east_score}, #{south_score}, 
+		#{west_score}, #{north_score}, 
+		#{east_player}, #{south_player, 
+		#{west_player}, #{north_player)
+	</insert>
+	
+	<update id="update" parameterType="Result">
+		UPDATE result 
+		SET derection = #{derection}, `rank` = #{rank}, 
+		east_score = #{east_score}, south_score = #{south_score}, 
+		west_score = #{west_score}, north_score = #{north_score}, 
+		east_player = #{east_player}, south_player = #{south_player}, 
+		west_player = #{west_player}, north_player = #{north_player} 
+		WHERE result_id = #{result_id} AND user_id = #{user_id}	
+	</update>
+	
+	<delete id="delete" >
+		DELETE FROM result 
+		WHERE result_id = #{result_id} AND user_id = #{user_id} 
+	</delete>
+	
+	<select id="findById">
+	
+	</select>
+</mapper>

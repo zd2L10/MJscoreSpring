@@ -2,101 +2,53 @@ package com.example.app.domain;
 
 import java.util.Date;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+
+@AllArgsConstructor
+@Data
 public class Result {
 	
+	
 	private Integer result_id;
+	
+	@NotBlank
 	private Integer user_id;
+	
+	@NotBlank
 	private String derection;
+	
+	@NotNull
 	private Integer rank;
+	
 	private Date time;
+	
+	@NotNull
 	private Integer east_score;
+	
+	@NotNull
 	private Integer south_score;
+	
+	@NotNull
 	private Integer west_score;
+	
+	@NotNull
 	private Integer north_score;
+	
+	@NotBlank
 	private String east_player;
+	
+	@NotBlank
 	private String south_player;
+	
+	@NotBlank
 	private String west_player;
+	
+	@NotBlank
 	private String north_player;
-	
-	
-	public Integer getId() {
-		return result_id;
-	}
-	public void setId(Integer result_id) {
-		this.result_id = result_id;
-	}
-	public Integer getUser_id() {
-		return user_id;
-	}
-	public void setUser_id(Integer user_id) {
-		this.user_id = user_id;
-	}
-	public String getDerection() {
-		return derection;
-	}
-	public void setDerection(String derection) {
-		this.derection = derection;
-	}
-	public Integer getRank() {
-		return rank;
-	}
-	public void setRank(Integer rank) {
-		this.rank = rank;
-	}
-	public Date getTime() {
-		return time;
-	}
-	public void setTime(Date time) {
-		this.time = time;
-	}
-	public Integer getEast_score() {
-		return east_score;
-	}
-	public void setEast_score(Integer east_score) {
-		this.east_score = east_score;
-	}
-	public Integer getSouth_score() {
-		return south_score;
-	}
-	public void setSouth_score(Integer south_score) {
-		this.south_score = south_score;
-	}
-	public Integer getWest_score() {
-		return west_score;
-	}
-	public void setWest_score(Integer west_score) {
-		this.west_score = west_score;
-	}
-	public Integer getNorth_score() {
-		return north_score;
-	}
-	public void setNorth_score(Integer north_score) {
-		this.north_score = north_score;
-	}
-	public String getEast_player() {
-		return east_player;
-	}
-	public void setEast_player(String east_player) {
-		this.east_player = east_player;
-	}
-	public String getSouth_player() {
-		return south_player;
-	}
-	public void setSouth_player(String south_player) {
-		this.south_player = south_player;
-	}
-	public String getWest_player() {
-		return west_player;
-	}
-	public void setWest_player(String west_player) {
-		this.west_player = west_player;
-	}
-	public String getNorth_player() {
-		return north_player;
-	}
-	public void setNorth_player(String north_player) {
-		this.north_player = north_player;
-	}
 	
 	
 }
