@@ -3,18 +3,16 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.app.mapper.ResultMapper">
 	
+	<resultMap id="joinedResult" type="Result" autoMapping="true">
+		<association property="user" javaType="User" autoMapping="true" />
+	</resultMap>
+	
 	<select id="findNewerResults" resultMap="joinedResult">
 		SELECT * FROM result 
 		JOIN user 
 		ON result.user_id = user.id 
 		WHERE user_id = #{id}
 		ORDER BY time DESC
-	</select>
-	
-	<select id="findResult" parameterType="int" resultType="Result">
-		SELECT * FROM result 
-		WHERE ures_id = #{id} 
-		ORDER BY time DESC LIMIT 1
 	</select>
 	
 	<insert id="insert" parameterType="Result">
@@ -47,7 +45,17 @@
 		WHERE result_id = #{result_id} AND user_id = #{user_id} 
 	</delete>
 	
-	<select id="findById">
-	
+	<select id="findById" resultMap="joinedResult">
+		SELECT 
+		result.result_id, result.user_id, user.login_id, 
+		result.derection, result.rank, result.time, 
+		result.east_score, result.south_score, 
+		result.west_score, result.north_score, 
+		result.east_player, result.south_player, 
+		result.west_player, result.north_player 
+		FROM result 
+		JOIN user 
+		ON result.user_id = user.id 
+		WHERE result_id = #{result_id} AND user_id = #{user_id}
 	</select>
 </mapper>

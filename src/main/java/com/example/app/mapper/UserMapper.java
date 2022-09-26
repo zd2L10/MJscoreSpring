@@ -1,7 +1,10 @@
 package com.example.app.mapper;
 
+import org.apache.ibatis.annotations.Mapper;
+
 import com.example.app.domain.User;
 
+@Mapper
 public interface UserMapper {
 
 	// IDの重複確認
@@ -9,8 +12,5 @@ public interface UserMapper {
 
 	// ユーザー登録
 	void insert(User user) throws Exception;
-
-	// ログイン認証
-	User findByLogin_idAndLogin_pass(String login_id, String login_pass) throws Exception;
 
 }
