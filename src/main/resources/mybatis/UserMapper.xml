@@ -3,13 +3,13 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.app.mapper.UserMapper">
 	
-	<select id="findByLogin_id" parameterType="String" resultType="User">
+	<select id="findByLoginId" parameterType="String" resultType="User">
 		SELECT * FROM user 
-		WHERE login_id = #{login_id}
+		WHERE login_id = #{loginId}
 	</select>
 	
 	<insert id="insert" parameterType="User">
 		INSERT INTO user (login_id, login_pass) 
-		VALUES #{login_id}, #{login_pass}
+		VALUES (#{loginId}, #{loginPass})
 	</insert>
 </mapper>

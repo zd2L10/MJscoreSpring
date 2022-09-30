@@ -21,30 +21,32 @@ public class LoginController {
 	@Autowired
 	UserService service;
 	
-	@GetMapping("/login")
+	@Autowired
+	HttpSession session;
+	
+	@GetMapping
 	public String login(Model model) {
 		model.addAttribute("user", new User());
 		return "login/login";
 	}
 	
-	@PostMapping("/login")
+	@PostMapping
 	public String login(
 			@Valid User user,
 			Errors errors,
 			HttpSession session) throws Exception {
 		
+		// 
+		if(!service.isCorrectIdAndPass(user.getLoginId(), user.getLoginPass())) {
+			errors.rejectValue("loginId", "error.incorrect_id_password");
+		}
 		// 入力不備確認のバリデーション
 		if(errors.hasErrors()) {
 			return "login/login";
 		}
-		// 
-		if(!service.isCorrectIdAndPass(user.getLogin_id(), user.getLogin_pass())) {
-			errors.rejectValue("login_id", "error.incorrect_id_password");
-			return "login/login";
-		}
 		
-		session.setAttribute("login_id", user.getLogin_id());
-		return "redirect:/login";
+		session.setAttribute("user", user);
+		return "redirect:/result";
 	}
 	
 	@GetMapping("/add")
@@ -58,19 +60,25 @@ public class LoginController {
 			@Valid User user,
 			Errors errors,
 			Model model) throws Exception{
+		User tempUser = null;
+		tempUser = service.getUserById(user.getLoginId());
+		if(tempUser != null) {
+			errors.rejectValue("loginId", "login_id.in.use");
+		}
+		if(!user.getConfpass().equals(user.getLoginPass())) {
+			errors.rejectValue("confpass", "confpass.not.same");
+		}
 		if(errors.hasErrors()) {
 			return "login/add";
 		}
-		if(!user.getConfpass().equals(user.getLogin_pass())) {
-			errors.rejectValue("confpass", "confpass.not.same");
-		}
-		User tempUser = null;
-		tempUser = service.getUserById(user.getLogin_id());
-		if(tempUser != null) {
-			errors.rejectValue("login_id", "login_id.in.use");
-		}
+		model.addAttribute("user", user);
 		service.addUser(user);
 		return "redirect:/login/addDone";
+	}
+	
+	@GetMapping("/addDone")
+	public String addDone() {
+		return "login/addDone";
 	}
 	
 }

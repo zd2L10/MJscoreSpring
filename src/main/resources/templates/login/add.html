@@ -10,26 +10,22 @@
 	<div class="container mt-5">
 		<div class="row">
 			<div class="col-lg-4 offset-lg-4">
-				<form action="" method="post" th:object="user">
+				<form action="" method="post" th:object="${user}">
 					<h1 class="text-center mb-3">
 						対局記録管理<br>新規登録
 					</h1>
-					<div class="alert alert-danger" role="alert"></div>
-
+					<div class="alert alert-danger" role="alert" th:errors="*{*}"></div>	
 					<div class="form-floating">
-						<span class="error" th:errors="*{login_id}"></span>
-						<input type="text" th:field="*{login_id}" class="form-control"
+						<input type="text" th:field="*{loginId}" class="form-control"
 							id="floatingInput" placeholder="ログインID"> <label
 							for="floatingInput">ログインID</label>
 					</div>
 					<div class="form-floating">
-						<span class="error" th:errors="*{login_pass}"></span>
-						<input type="password" th:field="*{login_pass}" class="form-control"
+						<input type="password" th:field="*{loginPass}" class="form-control"
 							id="floatingPassword" placeholder="パスワード"> <label
 							for="floatingInput">パスワード</label>
 					</div>
 					<div class="form-floating mb-3">
-						<span class="error" th:errors="*{confpass}"></span>
 						<input type="password" th:field="*{confpass}" class="form-control"
 							id="floatingconfPass" placeholder="パスワード(確認用)"> <label
 							for="floatingInput">パスワード(確認用)</label>

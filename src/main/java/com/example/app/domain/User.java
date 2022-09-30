@@ -12,10 +12,10 @@ public class User {
 	
 	@NotBlank
 	@Size(max=20)
-	private String login_id;
+	private String loginId;
 	
 	@NotBlank
-	private String login_pass;
+	private String loginPass;
 	
 	private String confpass;
 }

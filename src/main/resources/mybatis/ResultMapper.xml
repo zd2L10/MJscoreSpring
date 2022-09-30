@@ -23,26 +23,26 @@
 		east_player, south_player, 
 		west_player, north_player)
 		VALUES 
-		(#{user_id}, #{derection}, #{rank}, NOW(), 
-		#{east_score}, #{south_score}, 
-		#{west_score}, #{north_score}, 
-		#{east_player}, #{south_player, 
-		#{west_player}, #{north_player)
+		(#{userId}, #{derection}, #{rank}, NOW(), 
+		#{eastScore}, #{southScore}, 
+		#{westScore}, #{northScore}, 
+		#{eastPlayer}, #{southPlayer}, 
+		#{westPlayer}, #{northPlayer})
 	</insert>
 	
 	<update id="update" parameterType="Result">
 		UPDATE result 
 		SET derection = #{derection}, `rank` = #{rank}, 
-		east_score = #{east_score}, south_score = #{south_score}, 
-		west_score = #{west_score}, north_score = #{north_score}, 
-		east_player = #{east_player}, south_player = #{south_player}, 
-		west_player = #{west_player}, north_player = #{north_player} 
-		WHERE result_id = #{result_id} AND user_id = #{user_id}	
+		east_score = #{eastScore}, south_score = #{southScore}, 
+		west_score = #{westScore}, north_score = #{northScore}, 
+		east_player = #{eastPlayer}, south_player = #{southPlayer}, 
+		west_player = #{westPlayer}, north_player = #{northPlayer} 
+		WHERE result_id = #{resultId} 	
 	</update>
 	
 	<delete id="delete" >
 		DELETE FROM result 
-		WHERE result_id = #{result_id} AND user_id = #{user_id} 
+		WHERE result_id = #{resultId} 
 	</delete>
 	
 	<select id="findById" resultMap="joinedResult">
@@ -56,6 +56,6 @@
 		FROM result 
 		JOIN user 
 		ON result.user_id = user.id 
-		WHERE result_id = #{result_id} AND user_id = #{user_id}
+		WHERE result_id = #{resultId}
 	</select>
 </mapper>

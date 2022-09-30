@@ -10,23 +10,23 @@
 	<div class="container mt-5">
 		<div class="row">
 			<div class="col-lg-4 offset-lg-4">
-				<form action="" method="post" th:object="user">
+				<form action="" method="post" th:object="${user}">
 					<h1 class="text-center mb-3">対局管理ログイン</h1>
 
 					<div class="form-floating">
 					
-						<input type="text" th:field="*{login_id}" class="form-control"
+						<input type="text" th:field="*{loginId}" class="form-control"
 							id="floatingInput" placeholder="ログインID"> <label
 							for="floatingInput">ログインID</label>
 					</div>
 					<div class="form-floating mb-3">
-						<input type="password" th:field="*{login_pass}" class="form-control"
+						<input type="password" th:field="*{loginPass}" class="form-control"
 							id="floatingPassword" placeholder="パスワード"> <label
 							for="floatingPassword">パスワード</label>
 					</div>
 					<input type="submit" class="btn btn-lg btn-primary w-100 mb-3"
 						value="ログイン"> 
-					<a th:href="@{/add}" 
+					<a th:href="@{/login/add}" 
 						class="btn btn-lg btn-secondary w-100">新規登録</a>
 				</form>
 			</div>

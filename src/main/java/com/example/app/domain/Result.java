@@ -6,20 +6,19 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 
-@AllArgsConstructor
+
 @Data
 public class Result {
 	
 	
-	private Integer result_id;
+	private Integer resultId;
 	
 	@NotBlank
-	private Integer user_id;
+	private Integer userId;
 	
-	@NotBlank
+	@NotBlank(message="自家を選択してください")
 	private String derection;
 	
 	@NotNull
@@ -27,33 +26,37 @@ public class Result {
 	
 	private Date time;
 	
-	@NotNull
-	private Integer east_score;
+	@NotNull(message="東家の点数を入力してください")
+	@Size(max=7)
+	private Integer eastScore;
 	
-	@NotNull
-	private Integer south_score;
+	@NotNull(message="南家の点数を入力してください")
+	@Size(max=7)
+	private Integer southScore;
 	
-	@NotNull
-	private Integer west_score;
+	@NotNull(message="西家の点数を入力してください")
+	@Size(max=7)
+	private Integer westScore;
 	
-	@NotNull
-	private Integer north_score;
-	
-	@NotBlank
-	@Size(max=20)
-	private String east_player;
-	
-	@NotBlank
-	@Size(max=20)
-	private String south_player;
+	@NotNull(message="北家の点数を入力してください")
+	@Size(max=7)
+	private Integer northScore;
 	
 	@NotBlank
 	@Size(max=20)
-	private String west_player;
+	private String eastPlayer;
 	
 	@NotBlank
 	@Size(max=20)
-	private String north_player;
+	private String southPlayer;
+	
+	@NotBlank
+	@Size(max=20)
+	private String westPlayer;
+	
+	@NotBlank
+	@Size(max=20)
+	private String northPlayer;
 	
 	private User user;
 }

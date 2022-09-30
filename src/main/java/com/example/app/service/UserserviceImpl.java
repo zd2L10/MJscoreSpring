@@ -16,8 +16,8 @@ public class UserserviceImpl implements UserService {
 	UserMapper userMapper;
 
 	@Override
-	public User getUserById(String login_id) throws Exception {
-		return userMapper.findByLogin_id(login_id);
+	public User getUserById(String loginId) throws Exception {
+		return userMapper.findByLoginId(loginId);
 	}
 
 	@Override
@@ -27,16 +27,17 @@ public class UserserviceImpl implements UserService {
 	}
 
 	@Override
-	public boolean isCorrectIdAndPass(String login_id, String login_pass) throws Exception {
-		User user = userMapper.findByLogin_id(login_id);
+	public boolean isCorrectIdAndPass(String loginId, String loginPass) throws Exception {
+		User user = userMapper.findByLoginId(loginId);
 		
 		// ログインIDが正しいかチェック
 		if(user == null) {
 			return false;
 		}
 		
+		System.out.println(user);
 		// パスワードが正しいかチェック
-		if(!BCrypt.checkpw(login_pass, user.getLogin_pass())) {
+		if(!BCrypt.checkpw(loginPass, user.getLoginPass())) {
 			return false;
 		}
 		

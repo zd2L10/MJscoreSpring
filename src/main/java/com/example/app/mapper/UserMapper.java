@@ -8,7 +8,7 @@ import com.example.app.domain.User;
 public interface UserMapper {
 
 	// IDの重複確認
-	User findByLogin_id(String login_id) throws Exception;
+	User findByLoginId(String loginId) throws Exception;
 
 	// ユーザー登録
 	void insert(User user) throws Exception;
