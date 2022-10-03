@@ -7,126 +7,110 @@
 <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
-<!-- <c:import url="navbar.jsp" /> -->
+	<!-- <c:import url="navbar.jsp" /> -->
 	<div class="container mt-3">
 		<h1>対局記録詳細</h1>
 		<div id="table-view" class="toggle-display col-12 mt-5">
-			<table class="table table-bordered table-hover text-center" th:object="${result}">
-					
-					<th:block th:switch="${session.loginId}">
-						<!-- 東家の場合 -->
-						<th:block th:case="*{eastPlayer}">
+			<table class="table table-bordered table-hover text-center"
+				>
+
+				<th:block th:switch="${user.loginId}">
+					<!-- 東家の場合 -->
+					<th:block th:case="${result.eastPlayer}">
 						<thead>
 							<tr>
 								<th>順位</th>
 
-								<th th:text="*{eastPlayer}"></th>
-								<th th:text="*{southPlayer}"></th>
-								<th th:text="*{westPlayer}"></th>
-								<th th:text="*{northPlayer}"></th>
+								<th th:text="${result.eastPlayer}"></th>
+								<th th:text="${result.southPlayer}"></th>
+								<th th:text="${result.westPlayer}"></th>
+								<th th:text="${result.northPlayer}"></th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr>
-								<td th:text="|*{rank}位|"></td>
-								<td th:text="|東家&emsp;*{eastScore}点|">
-								</td>
-								<td th:text="|南家&emsp;*{southScore}点|">
-								</td>
-								<td th:text="|西家&emsp;*{westScore}点|">
-								</td>
-								<td th:text="|北家&emsp;*{northScore}点|">
-								</td>
+								<td th:text="|${result.rank}位|"></td>
+								<td th:text="|東家&emsp;${result.eastScore}点|"></td>
+								<td th:text="|南家&emsp;${result.southScore}点|"></td>
+								<td th:text="|西家&emsp;${result.westScore}点|"></td>
+								<td th:text="|北家&emsp;${result.northScore}点|"></td>
 							</tr>
 						</tbody>
-						</th:block>
-						<!-- 南家の場合 -->
-						<th:block th:case="*{southPlayer}">
-						<thead>
-							<tr>
-								<th>順位</th>
-
-								<th th:text="*{southPlayer}"></th>
-								<th th:text="*{westPlayer}"></th>
-								<th th:text="*{northPlayer}"></th>
-								<th th:text="*{eastPlayer}"></th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td th:text="|*{rank}位|"></td>
-								<td th:text="|南家&emsp;*{southScore}点|">
-								</td>
-								<td th:text="|西家&emsp;*{westScore}点|">
-								</td>
-								<td th:text="|北家&emsp;*{northScore}点|">
-								</td>
-								<td th:text="|東家&emsp;*{eastScore}点|">
-								</td>
-							</tr>
-						</tbody>
-						</th:block>
-						<!-- 西家の場合 -->
-						<th:block th:case="*{westPlayer}">
-						<thead>
-							<tr>
-								<th>順位</th>
-
-								<th th:text="*{westPlayer}"></th>
-								<th th:text="*{northPlayer}"></th>
-								<th th:text="*{eastPlayer}"></th>
-								<th th:text="*{southPlayer}"></th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td th:text="|*{rank}位|"></td>
-								<td th:text="|西家&emsp;*{westScore}点|">
-								</td>
-								<td th:text="|北家&emsp;*{northScore}点|">
-								</td>
-								<td th:text="|東家&emsp;*{eastScore}点|">
-								</td>
-								<td th:text="|南家&emsp;*{southScore}点|">
-								</td>
-							</tr>
-						</tbody>
-						</th:block>
-						<!-- 北家の場合 -->
-						<th:block th:case="*{northPlayer}">
-						<thead>
-							<tr>
-								<th>順位</th>
-
-								<th th:text="*{northPlayer}"></th>
-								<th th:text="*{eastPlayer}"></th>
-								<th th:text="*{southPlayer}"></th>
-								<th th:text="*{westPlayer}"></th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td th:text="|*{rank}位|"></td>
-								<td th:text="|北家&emsp;*{northScore}点|">
-								</td>
-								<td th:text="|東家&emsp;*{eastScore}点|">
-								</td>
-								<td th:text="|南家&emsp;*{southScore}点|">
-								</td>
-								<td th:text="|西家&emsp;*{westScore}点|">
-								</td>
-							</tr>
-						</tbody>
-						</th:block>
 					</th:block>
-					
+					<!-- 南家の場合 -->
+					<th:block th:case="${result.southPlayer}">
+						<thead>
+							<tr>
+								<th>順位</th>
+
+								<th th:text="${result.southPlayer}"></th>
+								<th th:text="${result.westPlayer}"></th>
+								<th th:text="${result.northPlayer}"></th>
+								<th th:text="${result.eastPlayer}"></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td th:text="|${result.rank}位|"></td>
+								<td th:text="|南家&emsp;${result.southScore}点|"></td>
+								<td th:text="|西家&emsp;${result.westScore}点|"></td>
+								<td th:text="|北家&emsp;${result.northScore}点|"></td>
+								<td th:text="|東家&emsp;${result.eastScore}点|"></td>
+							</tr>
+						</tbody>
+					</th:block>
+					<!-- 西家の場合 -->
+					<th:block th:case="${result.westPlayer}">
+						<thead>
+							<tr>
+								<th>順位</th>
+
+								<th th:text="${result.westPlayer}"></th>
+								<th th:text="${result.northPlayer}"></th>
+								<th th:text="${result.eastPlayer}"></th>
+								<th th:text="${result.southPlayer}"></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td th:text="|${result.rank}位|"></td>
+								<td th:text="|西家&emsp;${result.westScore}点|"></td>
+								<td th:text="|北家&emsp;${result.northScore}点|"></td>
+								<td th:text="|東家&emsp;${result.eastScore}点|"></td>
+								<td th:text="|南家&emsp;${result.southScore}点|"></td>
+							</tr>
+						</tbody>
+					</th:block>
+					<!-- 北家の場合 -->
+					<th:block th:case="${result.northPlayer}">
+						<thead>
+							<tr>
+								<th>順位</th>
+
+								<th th:text="${result.northPlayer}"></th>
+								<th th:text="${result.eastPlayer}"></th>
+								<th th:text="${result.southPlayer}"></th>
+								<th th:text="${result.westPlayer}"></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td th:text="|${result.rank}位|"></td>
+								<td th:text="|北家&emsp;${result.northScore}点|"></td>
+								<td th:text="|東家&emsp;${result.eastScore}点|"></td>
+								<td th:text="|南家&emsp;${result.southScore}点|"></td>
+								<td th:text="|西家&emsp;${result.westScore}点|"></td>
+							</tr>
+						</tbody>
+					</th:block>
+				</th:block>
+
 			</table>
 		</div>
-			<a class="btn btn-warning me-5"
-				th:href="@{/save/{id}(id=${result.id})}">修正する</a>
-			<a class="btn btn-secondary"
-				th:href="@{/result/list}">一覧に戻る</a>
-		</div>
-<!-- 	<c:import url="parts/commonJs.jsp" /> -->
+		<a class="btn btn-warning me-5"
+			th:href="@{/result/edit/{id}(id=${result.resultId})}">修正する</a> <a
+			class="btn btn-secondary" th:href="@{/result}">一覧に戻る</a>
+	</div>
+	<!-- 	<c:import url="parts/commonJs.jsp" /> -->
 </body>
 </html>

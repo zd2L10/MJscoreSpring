@@ -50,15 +50,16 @@ public class ResultController {
 			Model model) throws Exception{
 		// 参加プレイヤーの重複
 		if(result.getEastPlayer() == result.getSouthPlayer() || result.getEastPlayer() == result.getWestPlayer() || result.getEastPlayer() == result.getNorthPlayer() || result.getSouthPlayer() == result.getWestPlayer() || result.getSouthPlayer() == result.getNorthPlayer() || result.getWestPlayer() == result.getNorthPlayer()){
-			errors.rejectValue("player", "player.depl");
+			errors.reject("player.depl");
 		}
 		// 10万点越え
-		if ((result.getEastScore() + result.getSouthScore() + result.getWestScore() + result.getNorthScore()) != 100000) {
-			errors.rejectValue("score", "score.over");
+		if ((result.getEastScore() != null) && (result.getSouthScore() != null) && (result.getWestScore() != null) && (result.getNorthScore() != null) && (result.getEastScore() + result.getSouthScore() + result.getWestScore() + result.getNorthScore()) != 100000) {
+			errors.reject("score.over");
 		}
 		
 		// 入力不備
 		if(errors.hasErrors()) {
+			model.addAttribute("title", "登録");
 			return "result/save";
 		}
 		
@@ -95,6 +96,7 @@ public class ResultController {
 				
 		// 入力不備
 		if(errors.hasErrors()) {
+			model.addAttribute("title", "編集");
 			return "result/save";
 		}
 				
@@ -108,5 +110,13 @@ public class ResultController {
 	@GetMapping("/done")
 	public String done() {
 		return "result/done";
+	}
+	
+	@GetMapping("/{id}")
+	public String detailGet(@PathVariable Integer id,Model model) throws Exception{
+		User user = (User) session.getAttribute("user");
+		model.addAttribute("user", user);
+		model.addAttribute("result", resultservice.getResultById(id));
+		return "result/detail";
 	}
 }

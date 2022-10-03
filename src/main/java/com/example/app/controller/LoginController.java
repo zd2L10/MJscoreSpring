@@ -45,7 +45,7 @@ public class LoginController {
 			return "login/login";
 		}
 		
-		session.setAttribute("user", user);
+		session.setAttribute("user", service.getUserById(user.getLoginId()));
 		return "redirect:/result";
 	}
 	

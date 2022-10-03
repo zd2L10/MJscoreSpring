@@ -12,7 +12,7 @@
 	<form action="" method="post" id="mj" th:object="${result}">
 		<div class="container mt-3">
 
-			<h1 th:text="|対局記録 ${title}|"></h1>
+			<h1 th:text="|対局記録${title}|"></h1>
 			<!-- <div class="row mt-5">
 			<div class="col-2">
 				<h4>局数</h4>
@@ -29,58 +29,176 @@
 					<h4>プレイヤー</h4>
 				</div>
 				<div class="col-9">
+						<div class="alert alert-danger" role="alert" th:errors="*{*}" >
+							<p class="error" th:errors="*{derection}"></p>
+							<p class="error" th:errors="*{eastPlayer}"></p>
+							<p class="error" th:errors="*{southPlayer}"></p>
+							<p class="error" th:errors="*{westPlayer}"></p>
+							<p class="error" th:errors="*{northPlayer}"></p>
+							<p class="error" th:errors="*{eastScore}"></p>
+							<p class="error" th:errors="*{southScore}"></p>
+							<p class="error" th:errors="*{westScore}"></p>
+							<p class="error" th:errors="*{northScore}"></p>
+						</div>
 					<table>
-						<tr>
-							<th><label for="east">東家</label></th>
-							<td><th:block th:if="*{derection.equals('東家')}">
-									<input type="radio" th:field="*{derection}" value="東家"
-										checked="checked">
-								</th:block> <th:block th:unless="*{derection.equals('東家')}">
-									<input type="radio" th:field="*{derection}" value="東家">
-								</th:block></td>
-							<td><input type="text" th:field="*{eastPlayer}"
-								th:text="*{eastPlayer}"></td>
-						</tr>
-						<tr>
-							<th><label for="south">南家</label></th>
-							<td><th:block th:if="*{derection.equals('南家')}">
-									<input type="radio" th:field="*{derection}" value="南家"
-										checked="checked">
-								</th:block> <th:block th:unless="*{derection.equals('南家')}">
-									<input type="radio" th:field="*{derection}" value="南家">
-								</th:block></td>
-							<td><input type="text" th:field="*{southPlayer}"
-								th:text="*{southPlayer}"></td>
-						</tr>
-						<tr>
-							<th><label for="west">西家</label></th>
-							<td><th:block th:if="*{derection.equals('西家')}">
-									<input type="radio" th:field="*{derection}" value="西家"
-										checked="checked">
-								</th:block> <th:block th:unless="*{derection.equals('西家')}">
-									<input type="radio" th:field="*{derection}" value="西家">
-								</th:block></td>
-							<td><input type="text" th:field="*{westPlayer}"
-								th:text="*{westPlayer}"></td>
-						</tr>
-						<tr>
-							<th><label for="north">北家</label></th>
-							<td><th:block th:if="*{derection.equals('北家')}">
-									<input type="radio" th:field="*{derection}" value="北家"
-										checked="checked">
-								</th:block> <th:block th:unless="*{derection.equals('北家')}">
-									<input type="radio" th:field="*{derection}" value="北家">
-								</th:block></td>
-							<td><input type="text" th:field="*{northPlayer}"
-								th:text="*{northPlayer}"></td>
-						</tr>
-						
+
+						<th:block th:switch="${derection}">
+							<th:block th:case="東家">
+								<tr>
+									<th><label for="east">東家</label></th>
+									<td><input type="radio" id="derection" th:field="*{derection}" value="東家"
+										checked="checked"></td>
+									<td><input type="text" th:field="*{eastPlayer}"
+										></td>
+								</tr>
+								<tr>
+									<th><label for="south">南家</label></th>
+									<td><input type="radio" id="derection" th:field="*{derection}" value="南家">
+									</td>
+									<td><input type="text" th:field="*{southPlayer}"
+										></td>
+								</tr>
+								<tr>
+									<th><label for="west">西家</label></th>
+									<td><input type="radio" id="derection" th:field="*{derection}" value="西家">
+									</td>
+									<td><input type="text" th:field="*{westPlayer}"
+										></td>
+								</tr>
+								<tr>
+									<th><label for="north">北家</label></th>
+									<td><input type="radio" id="derection" th:field="*{derection}" value="北家">
+									</td>
+									<td><input type="text" th:field="*{northPlayer}"
+										></td>
+								</tr>
+							</th:block>
+							<th:block th:case="南家">
+								<tr>
+									<th><label for="east">東家</label></th>
+									<td><input type="radio" id="derection" th:field="*{derection}" value="東家">
+									</td>
+									<td><input type="text" th:field="*{eastPlayer}"
+										></td>
+								</tr>
+								<tr>
+									<th><label for="south">南家</label></th>
+									<td><input type="radio" id="derection" th:field="*{derection}" value="南家"
+										checked="checked"></td>
+									<td><input type="text" th:field="*{southPlayer}"
+										></td>
+								</tr>
+								<tr>
+									<th><label for="west">西家</label></th>
+									<td><input type="radio" id="derection" th:field="*{derection}" value="西家">
+									</td>
+									<td><input type="text" th:field="*{westPlayer}"
+										></td>
+								</tr>
+								<tr>
+									<th><label for="north">北家</label></th>
+									<td><input type="radio" id="derection" th:field="*{derection}" value="北家">
+									</td>
+									<td><input type="text" th:field="*{northPlayer}"
+										></td>
+								</tr>
+							</th:block>
+							<th:block th:case="西家">
+								<tr>
+									<th><label for="east">東家</label></th>
+									<td><input type="radio" id="derection" th:field="*{derection}" value="東家"></td>
+									<td><input type="text" th:field="*{eastPlayer}"
+										></td>
+								</tr>
+								<tr>
+									<th><label for="south">南家</label></th>
+									<td><input type="radio" id="derection" th:field="*{derection}" value="南家">
+									</td>
+									<td><input type="text" th:field="*{southPlayer}"
+										></td>
+								</tr>
+								<tr>
+									<th><label for="west">西家</label></th>
+									<td><input type="radio" id="derection" th:field="*{derection}" value="西家"
+										checked="checked"></td>
+									<td><input type="text" th:field="*{westPlayer}"
+										></td>
+								</tr>
+								<tr>
+									<th><label for="north">北家</label></th>
+									<td><input type="radio" id="derection" th:field="*{derection}" value="北家">
+									</td>
+									<td><input type="text" th:field="*{northPlayer}"
+										></td>
+								</tr>
+							</th:block>
+							<th:block th:case="北家">
+								<tr>
+									<th><label for="east">東家</label></th>
+									<td><input type="radio" id="derection" th:field="*{derection}" value="東家"></td>
+									<td><input type="text" th:field="*{eastPlayer}"
+										></td>
+								</tr>
+								<tr>
+									<th><label for="south">南家</label></th>
+									<td><input type="radio" id="derection" th:field="*{derection}" value="南家">
+									</td>
+									<td><input type="text" th:field="*{southPlayer}"
+										></td>
+								</tr>
+								<tr>
+									<th><label for="west">西家</label></th>
+									<td><input type="radio" id="derection" th:field="*{derection}" value="西家">
+									</td>
+									<td><input type="text" th:field="*{westPlayer}"
+										></td>
+								</tr>
+								<tr>
+									<th><label for="north">北家</label></th>
+									<td><input type="radio" id="derection" th:field="*{derection}" value="北家"
+										checked="checked"></td>
+									<td><input type="text" th:field="*{northPlayer}"
+										></td>
+								</tr>
+							</th:block>
+							<th:block th:case="*">
+								<tr>
+									<th><label for="east">東家</label></th>
+									<td><input type="radio" id="derection" th:field="*{derection}" value="東家"></td>
+									<td><input type="text" th:field="*{eastPlayer}"
+										></td>
+								</tr>
+								<tr>
+									<th><label for="south">南家</label></th>
+									<td><input type="radio" id="derection" th:field="*{derection}" value="南家">
+									</td>
+									<td><input type="text" th:field="*{southPlayer}"
+										></td>
+								</tr>
+								<tr>
+									<th><label for="west">西家</label></th>
+									<td><input type="radio" id="derection" th:field="*{derection}" value="西家">
+									</td>
+									<td><input type="text" th:field="*{westPlayer}"
+										></td>
+								</tr>
+								<tr>
+									<th><label for="north">北家</label></th>
+									<td><input type="radio" id="derection" th:field="*{derection}" value="北家">
+									</td>
+									<td><input type="text" th:field="*{northPlayer}"
+										></td>
+								</tr>
+							</th:block>
+
+						</th:block>
+
 					</table>
 					<input type="hidden" th:field="*{userId}" id="hidden1"
-						th:text="*{user.id}"> <input type="hidden"
-						th:field="*{loginId}" id="hidden2" th:text="*{user.loginId}">
+						> <input type="hidden"
+						th:field="*{user.loginId}" id="hidden2" >
 					<input type="hidden" th:field="*{resultId}" id="hidden3"
-						th:text="*{resultId}">
+						>
 				</div>
 			</div>
 			<div class="row mt-3">
@@ -92,22 +210,22 @@
 						<tr>
 							<th>東家</th>
 							<td><input type="text" th:field="*{eastScore}"
-								th:text="|*{eastScore}点|"></td>
+								th:value="*{eastScore}">点</td>
 						</tr>
 						<tr>
 							<th>南家</th>
 							<td><input type="text" th:field="*{southScore}"
-								th:text="|*{southScore}点|"></td>
+								th:value="*{southScore}">点</td>
 						</tr>
 						<tr>
 							<th>西家</th>
 							<td><input type="text" th:field="*{westScore}"
-								th:text="|*{westScore}点|"></td>
+								th:value="*{westScore}">点</td>
 						</tr>
 						<tr>
 							<th>北家</th>
 							<td><input type="text" th:field="*{northScore}"
-								th:text="|*{northScore}点|"></td>
+								th:value="*{northScore}">点</td>
 						</tr>
 					</table>
 				</div>
@@ -150,10 +268,9 @@
 					</select>位です
 				</p>
 			</div>
-			<input type="submit" class="btn btn-primary mt-1 me-5"
-				th:value="|${title}する|"> <a
-				class="btn btn-secondary mt-1"
-				th:href="@{/result/list}">一覧に戻る</a>
+			<input type="submit" class="btn btn-primary mt-1 me-5" 
+				th:value="|${title}する|"> <a class="btn btn-secondary mt-1"
+				th:href="@{/result}">一覧に戻る</a>
 		</div>
 	</form>
 
@@ -167,7 +284,7 @@
 
 		$(document).ready(function() {
 
-			$('input[th:field="derection"]').change(function() {
+			$('input[th:field="*{derection}"]').change(function() {
 				const user = $('#hidden2').val();
 
 				$(this).parent().next().children().val(user);

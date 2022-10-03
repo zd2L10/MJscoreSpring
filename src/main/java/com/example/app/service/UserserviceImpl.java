@@ -35,7 +35,6 @@ public class UserserviceImpl implements UserService {
 			return false;
 		}
 		
-		System.out.println(user);
 		// パスワードが正しいかチェック
 		if(!BCrypt.checkpw(loginPass, user.getLoginPass())) {
 			return false;
