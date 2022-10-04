@@ -13,20 +13,22 @@
 				<form action="" method="post" th:object="${user}">
 					<h1 class="text-center mb-3">対局管理ログイン</h1>
 
+					<p class="error" th:errors="*{loginId}"></p>
+					<p class="error" th:errors="*{loginPass}"></p>
+					<p class="error" th:errors="*{login}"></p>
+
 					<div class="form-floating">
-					
 						<input type="text" th:field="*{loginId}" class="form-control"
 							id="floatingInput" placeholder="ログインID"> <label
 							for="floatingInput">ログインID</label>
 					</div>
 					<div class="form-floating mb-3">
-						<input type="password" th:field="*{loginPass}" class="form-control"
-							id="floatingPassword" placeholder="パスワード"> <label
-							for="floatingPassword">パスワード</label>
+						<input type="password" th:field="*{loginPass}"
+							class="form-control" id="floatingPassword" placeholder="パスワード">
+						<label for="floatingPassword">パスワード</label>
 					</div>
 					<input type="submit" class="btn btn-lg btn-primary w-100 mb-3"
-						value="ログイン"> 
-					<a th:href="@{/login/add}" 
+						value="ログイン"> <a th:href="@{/login/add}"
 						class="btn btn-lg btn-secondary w-100">新規登録</a>
 				</form>
 			</div>

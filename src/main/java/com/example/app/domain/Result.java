@@ -14,7 +14,6 @@ public class Result {
 
 	private Integer resultId;
 
-	
 	private Integer userId;
 
 	@NotBlank(message = "自家を選択してください")
@@ -58,4 +57,8 @@ public class Result {
 	private String northPlayer;
 
 	private User user;
+
+	private String deplayer;
+
+	private String ovscore;
 }

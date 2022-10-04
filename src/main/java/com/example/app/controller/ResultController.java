@@ -49,12 +49,12 @@ public class ResultController {
 			Errors errors,
 			Model model) throws Exception{
 		// 参加プレイヤーの重複
-		if(result.getEastPlayer() == result.getSouthPlayer() || result.getEastPlayer() == result.getWestPlayer() || result.getEastPlayer() == result.getNorthPlayer() || result.getSouthPlayer() == result.getWestPlayer() || result.getSouthPlayer() == result.getNorthPlayer() || result.getWestPlayer() == result.getNorthPlayer()){
-			errors.reject("player.depl");
+		if((!result.getEastPlayer().isBlank()) && (!result.getSouthPlayer().isBlank()) && (!result.getWestPlayer().isBlank()) && (!result.getNorthPlayer().isBlank()) && (result.getEastPlayer() == result.getSouthPlayer() || result.getEastPlayer() == result.getWestPlayer() || result.getEastPlayer() == result.getNorthPlayer() || result.getSouthPlayer() == result.getWestPlayer() || result.getSouthPlayer() == result.getNorthPlayer() || result.getWestPlayer() == result.getNorthPlayer())){
+			errors.rejectValue("deplayer", "player.depl");
 		}
 		// 10万点越え
 		if ((result.getEastScore() != null) && (result.getSouthScore() != null) && (result.getWestScore() != null) && (result.getNorthScore() != null) && (result.getEastScore() + result.getSouthScore() + result.getWestScore() + result.getNorthScore()) != 100000) {
-			errors.reject("score.over");
+			errors.rejectValue("ovscore", "score.over");
 		}
 		
 		// 入力不備

@@ -18,4 +18,6 @@ public class User {
 	private String loginPass;
 	
 	private String confpass;
+	
+	private String login;
 }

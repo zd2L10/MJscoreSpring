@@ -37,8 +37,8 @@ public class LoginController {
 			HttpSession session) throws Exception {
 		
 		// 
-		if(!service.isCorrectIdAndPass(user.getLoginId(), user.getLoginPass())) {
-			errors.rejectValue("loginId", "error.incorrect_id_password");
+		if((!user.getLoginId().isBlank() && !user.getLoginPass().isBlank()) && (!service.isCorrectIdAndPass(user.getLoginId(), user.getLoginPass()))) {
+			errors.rejectValue("login", "incorrect_id_password");
 		}
 		// 入力不備確認のバリデーション
 		if(errors.hasErrors()) {

@@ -14,7 +14,11 @@
 					<h1 class="text-center mb-3">
 						対局記録管理<br>新規登録
 					</h1>
-					<div class="alert alert-danger" role="alert" th:errors="*{*}"></div>	
+					
+					<p class="error" th:errors="*{loginId}"></p>
+					<p class="error" th:errors="*{loginPass}"></p>
+					<p class="error" th:errors="*{confpass}"></p>
+					
 					<div class="form-floating">
 						<input type="text" th:field="*{loginId}" class="form-control"
 							id="floatingInput" placeholder="ログインID"> <label
