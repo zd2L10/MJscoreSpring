@@ -2,10 +2,11 @@ package com.example.app.domain;
 
 import java.util.Date;
 
-import javax.validation.constraints.Max;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.Range;
 
 import lombok.Data;
 
@@ -25,19 +26,19 @@ public class Result {
 	private Date time;
 
 	@NotNull(message = "東家の点数を入力してください")
-	@Max(7)
+	@Range(min=-999999, max=1000000)
 	private Integer eastScore;
 
 	@NotNull(message = "南家の点数を入力してください")
-	@Max(7)
+	@Range(min=-999999, max=1000000)
 	private Integer southScore;
 
 	@NotNull(message = "西家の点数を入力してください")
-	@Max(7)
+	@Range(min=-999999, max=1000000)
 	private Integer westScore;
 
 	@NotNull(message = "北家の点数を入力してください")
-	@Max(7)
+	@Range(min=-999999, max=1000000)
 	private Integer northScore;
 
 	@NotBlank
