@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.app.domain.Result;
 import com.example.app.domain.User;
@@ -37,7 +38,9 @@ public class ResultController {
 	public String addGet(Model model) throws Exception{
 		User user = (User) session.getAttribute("user");
 		model.addAttribute("user", user);
-		model.addAttribute("result", new Result());
+		Result result = new Result();
+		result.setUserId(user.getId());		
+		model.addAttribute("result", result);
 		model.addAttribute("title", "登録");
 		return "result/save";
 	}
@@ -59,15 +62,16 @@ public class ResultController {
 		
 		// 入力不備
 		if(errors.hasErrors()) {
+			User user = (User) session.getAttribute("user");
+			model.addAttribute("user", user);
 			model.addAttribute("title", "登録");
 			return "result/save";
 		}
 		
 		// データベースに追加
 		resultservice.addResult(result);
-		// リダイレクト
 		model.addAttribute("title", "登録");
-		return "redirecct:/done";
+		return "result/done";
 	}
 	
 	@GetMapping("/edit/{id}")
@@ -102,9 +106,8 @@ public class ResultController {
 				
 		// データベースに追加
 		resultservice.editResult(result);
-		// リダイレクト
 		model.addAttribute("title", "修正");
-		return "redirecct:/done";	
+		return "/result/done";	
 	}
 	
 	@GetMapping("/done")
@@ -118,5 +121,12 @@ public class ResultController {
 		model.addAttribute("user", user);
 		model.addAttribute("result", resultservice.getResultById(id));
 		return "result/detail";
+	}
+	
+	@GetMapping("/delete/{id}")
+	public String delete(@PathVariable Integer id, RedirectAttributes rd) throws Exception{
+		resultservice.deleteResult(id);
+		rd.addFlashAttribute("statusMessage", "対局記録を削除しました。");
+		return "redirect:/result";
 	}
 }
