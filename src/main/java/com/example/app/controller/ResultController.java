@@ -107,7 +107,7 @@ public class ResultController {
 		// データベースに追加
 		resultservice.editResult(result);
 		model.addAttribute("title", "修正");
-		return "/result/done";	
+		return "result/done";	
 	}
 	
 	@GetMapping("/done")

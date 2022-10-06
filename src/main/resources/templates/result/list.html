@@ -10,12 +10,19 @@
 	<!-- <c:import url="navbar.jsp" /> -->
 	<div class="container mt-3">
 		<h1>対局記録一覧</h1>
-		<div class="row mt-3">
+		<div class="row mt-5">
 			<div>
-				<a class="btn btn-success"
-					th:href="@{/result/add}">対局記録の登録</a>
+				<a class="btn btn-success" th:href="@{/result/add}">対局記録の登録</a>
 			</div>
 		</div>
+
+		<!-- 記録削除によるメッセージを表示 -->
+		<div class="alert alert-danger mt-3" role="alert"
+			th:if="${statusMessage}">
+			<th:block th:text="${statusMessage}"></th:block>
+		</div>
+		<!-- 記録削除によるメッセージを表示 -->
+
 		<div class="row mt-5">
 			<div class="col-12">
 				<div id="table-view" class="toggle-display col-12 mt-3">
@@ -30,17 +37,19 @@
 						</thead>
 						<tbody>
 							<!-- <th:block th:if="${#lists.empty(result)}"></th:block> -->
-								<tr th:each="result : ${resultList}">
-									<td th:text="${#dates.format(result.time, 'yyyy-MM-dd HH:mm:ss')}"></td>
-									<td th:text="${result.derection}"></td>
-									<td th:text="|${result.rank} 位|"></td>
-									<td><a class="btn btn-warning me-lg-3"
-										th:href="@{/result/{id}(id=${result.resultId})}">詳細</a>
-										<!-- <a class="btn btn-danger delete ms-lg-3" data-bs-toggle="modal"
-										data-bs-target="#deleteModal" data-role="deleteResult"
-										data-resultToDelete="<fmt:formatDate value='${result.time}' pattern='yyyy-MM-dd HH:mm:ss' />"
-										th:href="">削除</a></td> -->
-								</tr>
+							<tr th:each="result : ${resultList}">
+								<td
+									th:text="${#dates.format(result.time, 'yyyy-MM-dd HH:mm:ss')}"></td>
+								<td th:text="${result.derection}"></td>
+								<td th:text="|${result.rank} 位|"></td>
+								<td><a class="btn btn-warning me-lg-3"
+									th:href="@{/result/{id}(id=${result.resultId})}">詳細</a>
+									<a
+									class="btn btn-danger delete ms-lg-3" data-bs-toggle="modal"
+									data-bs-target="#deleteModal" data-role="deleteResult"
+									th:data-name="${#dates.format(result.time, 'yyyy-MM-dd HH:mm:ss')}"
+									th:href="@{/result/delete/{id}(id=${result.resultId})}">削除</a></td>
+							</tr>
 						</tbody>
 					</table>
 				</div>
@@ -53,15 +62,19 @@
 			</div>
 		</div>
 	</div>
+	
+	
 	<!-- 削除モーダル -->
-	<div class="modal fade" id="deleteModal" tabindex="-1"
+	<div class="modal fade" id="deleteModal" tabindex="-1" 
 		aria-labelledby="deleteModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
+		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
 					<h5 class="modal-title" id="deleteModalLabel">記録の削除</h5>
 					<button type="button" class="btn-close" data-bs-dismiss="modal"
-						aria-label="Close"></button>
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
 				</div>
 				<div class="modal-body">
 					「<span id="modal-date"></span>」の記録を削除しますか？
@@ -74,16 +87,17 @@
 			</div>
 		</div>
 	</div>
-
+	<script th:src="@{/js/jquery-3.6.0.min.js}"></script>
+	<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
 	<!-- <c:import url="parts/commonJs.jsp" /> -->
 	<!-- 削除ボタン -->
 	<script>
-		$(document).ready(function() {
+	$(document).ready(function() {
 			$('[data-role="deleteResult"]').click(function() {
-				$('#modal-date').text($(this).attr('data-resultToDelete'));
+				$('#modal-date').text($(this).attr('data-name'));
 				$('#delete-link').attr('href', $(this).attr('href'));
 			});
-		});
+	});
 	</script>
 </body>
 </html>
