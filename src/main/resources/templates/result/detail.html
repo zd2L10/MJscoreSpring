@@ -1,13 +1,8 @@
 <!DOCTYPE html>
 <html lang="ja" xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="UTF-8">
-<title>対局記録</title>
-<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
-<link rel="stylesheet" th:href="@{/css/style.css}">
-</head>
+<head th:replace="~{parts/common :: header}"></head>
 <body>
-	<!-- <c:import url="navbar.jsp" /> -->
+<th:block th:replace="~{parts/common :: navbar}"></th:block>
 	<div class="container mt-3">
 		<h1>対局記録詳細</h1>
 		<div id="table-view" class="toggle-display col-12 mt-5">
@@ -111,6 +106,6 @@
 			th:href="@{/result/edit/{id}(id=${result.resultId})}">修正する</a> <a
 			class="btn btn-secondary" th:href="@{/result}">一覧に戻る</a>
 	</div>
-	<!-- 	<c:import url="parts/commonJs.jsp" /> -->
+	<th:block th:replace="~{parts/common :: script}"></th:block>
 </body>
 </html>

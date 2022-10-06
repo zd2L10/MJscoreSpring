@@ -30,6 +30,7 @@ public class ResultController {
 	@GetMapping
 	public String list(Model model) throws Exception{
 		User user = (User) session.getAttribute("user");
+		model.addAttribute("user", user);
 		model.addAttribute("resultList", resultservice.AllResult(user.getId()));
 		return "result/list";
 	}
@@ -71,6 +72,8 @@ public class ResultController {
 		// データベースに追加
 		resultservice.addResult(result);
 		model.addAttribute("title", "登録");
+		User user = (User) session.getAttribute("user");
+		model.addAttribute("user", user);
 		return "result/done";
 	}
 	
@@ -107,12 +110,9 @@ public class ResultController {
 		// データベースに追加
 		resultservice.editResult(result);
 		model.addAttribute("title", "修正");
+		User user = (User) session.getAttribute("user");
+		model.addAttribute("user", user);
 		return "result/done";	
-	}
-	
-	@GetMapping("/done")
-	public String done() {
-		return "result/done";
 	}
 	
 	@GetMapping("/{id}")
@@ -129,4 +129,11 @@ public class ResultController {
 		rd.addFlashAttribute("statusMessage", "対局記録を削除しました。");
 		return "redirect:/result";
 	}
+	
+	@GetMapping("/logout")
+	public String logout(HttpSession session) {
+		session.invalidate();
+		return "redirect:/login";
+	}
+	
 }
