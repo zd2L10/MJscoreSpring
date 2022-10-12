@@ -2,8 +2,7 @@
 <html lang="ja" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{parts/common :: header}"></head>
 <body>
-<th:block th:replace="~{parts/common :: navbar}"></th:block>
-	<!-- <c:import url="navbar.jsp" /> -->
+	<th:block th:replace="~{parts/common :: navbar}"></th:block>
 	<div class="container mt-3">
 		<h1>対局記録一覧</h1>
 		<div class="row mt-5">
@@ -32,19 +31,22 @@
 							</tr>
 						</thead>
 						<tbody>
-							<!-- <th:block th:if="${#lists.empty(result)}"></th:block> -->
-							<tr th:each="result : ${resultList}">
-								<td
-									th:text="${#dates.format(result.time, 'yyyy-MM-dd HH:mm:ss')}"></td>
-								<td th:text="${result.derection}"></td>
-								<td th:text="|${result.rank} 位|"></td>
-								<td><a class="btn btn-warning me-lg-3"
-									th:href="@{/result/{id}(id=${result.resultId})}">詳細</a>
-									<a
-									class="btn btn-danger delete ms-lg-3" data-bs-toggle="modal"
-									data-bs-target="#deleteModal" data-role="deleteResult"
-									th:data-name="${#dates.format(result.time, 'yyyy-MM-dd HH:mm:ss')}"
-									th:href="@{/result/delete/{id}(id=${result.resultId})}">削除</a></td>
+							<tr>
+								<th:block th:if="${#lists.isEmpty(resultList)}">
+									<td colspan="9">記録はありません</td>
+								</th:block>
+								<th:block th:each="result : ${resultList}">
+									<td
+										th:text="${#dates.format(result.time, 'yyyy-MM-dd HH:mm:ss')}"></td>
+									<td th:text="${result.derection}"></td>
+									<td th:text="|${result.rank} 位|"></td>
+									<td><a class="btn btn-warning me-lg-3"
+										th:href="@{/result/{id}(id=${result.resultId})}">詳細</a> <a
+										class="btn btn-danger delete ms-lg-3" data-bs-toggle="modal"
+										data-bs-target="#deleteModal" data-role="deleteResult"
+										th:data-name="${#dates.format(result.time, 'yyyy-MM-dd HH:mm:ss')}"
+										th:href="@{/result/delete/{id}(id=${result.resultId})}">削除</a></td>
+								</th:block>
 							</tr>
 						</tbody>
 					</table>
@@ -58,10 +60,10 @@
 			</div>
 		</div>
 	</div>
-	
-	
+
+
 	<!-- 削除モーダル -->
-	<div class="modal fade" id="deleteModal" tabindex="-1" 
+	<div class="modal fade" id="deleteModal" tabindex="-1"
 		aria-labelledby="deleteModalLabel" aria-hidden="true">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
@@ -84,15 +86,14 @@
 		</div>
 	</div>
 	<th:block th:replace="~{parts/common :: script}"></th:block>
-	<!-- <c:import url="parts/commonJs.jsp" /> -->
 	<!-- 削除ボタン -->
 	<script>
-	$(document).ready(function() {
+		$(document).ready(function() {
 			$('[data-role="deleteResult"]').click(function() {
 				$('#modal-date').text($(this).attr('data-name'));
 				$('#delete-link').attr('href', $(this).attr('href'));
 			});
-	});
+		});
 	</script>
 </body>
 </html>
