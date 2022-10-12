@@ -10,7 +10,6 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.app.domain.Result;
@@ -18,7 +17,7 @@ import com.example.app.domain.User;
 import com.example.app.service.ResultService;
 
 @Controller
-@RequestMapping("/result")
+
 public class ResultController {
 
 	@Autowired
@@ -27,7 +26,7 @@ public class ResultController {
 	@Autowired
 	HttpSession session;
 	
-	@GetMapping
+	@GetMapping("/result")
 	public String list(Model model) throws Exception{
 		User user = (User) session.getAttribute("user");
 		model.addAttribute("user", user);
@@ -35,7 +34,7 @@ public class ResultController {
 		return "result/list";
 	}
 	
-	@GetMapping("/add")
+	@GetMapping("/result/add")
 	public String addGet(Model model) throws Exception{
 		User user = (User) session.getAttribute("user");
 		model.addAttribute("user", user);
@@ -46,7 +45,7 @@ public class ResultController {
 		return "result/save";
 	}
 	
-	@PostMapping("/add")
+	@PostMapping("/result/add")
 	public String addPost(
 			HttpSession session,
 			@Valid Result result,
@@ -77,7 +76,7 @@ public class ResultController {
 		return "result/done";
 	}
 	
-	@GetMapping("/edit/{id}")
+	@GetMapping("/result/edit/{id}")
 	public String editGet(@PathVariable Integer id, Model model)throws Exception{
 		User user = (User) session.getAttribute("user");
 		model.addAttribute("user", user);
@@ -86,7 +85,7 @@ public class ResultController {
 		return "result/save"; 
 	}
 	
-	@PostMapping("/edit/{id}")
+	@PostMapping("/result/edit/{id}")
 	public String editPost(
 			HttpSession session,
 			@Valid Result result,
@@ -115,7 +114,7 @@ public class ResultController {
 		return "result/done";	
 	}
 	
-	@GetMapping("/{id}")
+	@GetMapping("/result/{id}")
 	public String detailGet(@PathVariable Integer id,Model model) throws Exception{
 		User user = (User) session.getAttribute("user");
 		model.addAttribute("user", user);
@@ -123,7 +122,7 @@ public class ResultController {
 		return "result/detail";
 	}
 	
-	@GetMapping("/delete/{id}")
+	@GetMapping("/result/delete/{id}")
 	public String delete(@PathVariable Integer id, RedirectAttributes rd) throws Exception{
 		resultservice.deleteResult(id);
 		rd.addFlashAttribute("statusMessage", "対局記録を削除しました。");
