@@ -3,6 +3,7 @@ package com.example.app.controller;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -71,6 +72,7 @@ public class LoginController {
 		if(errors.hasErrors()) {
 			return "login/add";
 		}
+		user.setLoginPass(BCrypt.hashpw(user.getLoginPass(), BCrypt.gensalt()));
 		model.addAttribute("user", user);
 		service.addUser(user);
 		return "redirect:/login/addDone";
