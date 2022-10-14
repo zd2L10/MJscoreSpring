@@ -10,6 +10,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.app.domain.Result;
@@ -26,11 +27,16 @@ public class ResultController {
 	@Autowired
 	HttpSession session;
 	
+	private static final int NUM_PER_PAGE = 10;
+	
 	@GetMapping("/result")
-	public String list(Model model) throws Exception{
+	public String list(@RequestParam(name = "page", defaultValue = "1") Integer page, Model model) throws Exception{
 		User user = (User) session.getAttribute("user");
 		model.addAttribute("user", user);
-		model.addAttribute("resultList", resultservice.AllResult(user.getId()));
+		/* model.addAttribute("resultList", resultservice.AllResult(user.getId())); */
+		model.addAttribute("resultList", resultservice.getResultListByPage(user.getId(), page, NUM_PER_PAGE));
+		model.addAttribute("page", page);
+		model.addAttribute("totalPage", resultservice.getTotalPages(user.getId(), NUM_PER_PAGE));
 		return "result/list";
 	}
 	

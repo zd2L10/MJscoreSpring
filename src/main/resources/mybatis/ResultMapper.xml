@@ -58,4 +58,22 @@
 		ON result.user_id = user.id 
 		WHERE result_id = #{resultId}
 	</select>
+	
+	<!-- ページ分割 -->
+	<select id="countResult" resultType="long">
+	SELECT COUNT(*)
+	FROM result
+	JOIN user
+	ON result.user_id = user.id
+	WHERE user_id = #{id}
+	ORDER BY time DESC
+	</select>
+	
+	<select id="selectLimited" resultType="Result">
+	SELECT * FROM result
+	JOIN user
+	ON result.user_id = user.id
+	WHERE user_id = #{id}
+	LIMIT #{offset}, #{limit}
+	</select>
 </mapper>

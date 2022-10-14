@@ -39,6 +39,19 @@ public class ResultServiceImpl implements ResultService{
 		resultMapper.delete(id);
 	}
 	
+	@Override
+	public int getTotalPages(Integer id, int numPerPage) throws Exception {
+		double totalNum = (double) resultMapper.countResult(id);
+		return (int) Math.ceil(totalNum / numPerPage);
+	}
+
+	@Override
+	public List<Result> getResultListByPage(Integer id, int page, int numPerPage) throws Exception {
+		int offset = numPerPage * (page - 1);
+		return resultMapper.selectLimited(id, offset, numPerPage);
+	}
+
+	
 	
 	
 

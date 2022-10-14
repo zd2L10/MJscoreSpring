@@ -21,4 +21,9 @@ public interface ResultService {
 	// データを削除
 	void deleteResult (Integer id) throws Exception;
 	
+	// 合計件数
+	int getTotalPages(Integer id, int numPerPage)throws Exception;
+	
+	// ページ分割
+	List<Result> getResultListByPage(Integer id, int page, int numPerPage)throws Exception;
 }
