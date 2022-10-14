@@ -67,13 +67,13 @@
 		</th:block>
 		
 		<!-- ページ番号 -->
-		<th:block th:each="index : ${#numbers.sequenc(1, totalPage)}">
-		<th:block th:swich="${index}">
+		<th:block th:each="index : ${#numbers.sequence(1, totalPage)}">
+		<th:block th:switch="${index}">
 			<li th:case="${page}" class="page-item active">
 				<a class="page-link" href="" th:text="${index}"></a>
 			</li>
 			<li th:case="*" class="page-item">
-				<a class="page-item" th:href="@{/result(page=${index})}" th:text="${index}"></a>
+				<a class="page-link" th:href="@{/result(page=${index})}" th:text="${index}"></a>
 			</li>
 		</th:block>
 		</th:block>
