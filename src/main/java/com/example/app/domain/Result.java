@@ -20,25 +20,24 @@ public class Result {
 	@NotBlank(message = "自家を選択してください")
 	private String derection;
 
-	@NotNull
 	private Integer rank;
 
 	private Date time;
 
-	@NotNull(message = "東家の点数を入力してください")
-	@Range(min=-999999, max=1000000)
+	@NotNull
+	@Range(min=-999999, max=9999999)
 	private Integer eastScore;
 
-	@NotNull(message = "南家の点数を入力してください")
-	@Range(min=-999999, max=1000000)
+	@NotNull
+	@Range(min=-999999, max=9999999)
 	private Integer southScore;
 
-	@NotNull(message = "西家の点数を入力してください")
-	@Range(min=-999999, max=1000000)
+	@NotNull
+	@Range(min=-999999, max=9999999)
 	private Integer westScore;
 
-	@NotNull(message = "北家の点数を入力してください")
-	@Range(min=-999999, max=1000000)
+	@NotNull
+	@Range(min=-999999, max=9999999)
 	private Integer northScore;
 
 	@NotBlank
